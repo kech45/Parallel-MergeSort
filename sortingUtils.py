@@ -65,3 +65,8 @@ def parallelMergeSort(arr, processCount):
         # sortedChunks = [[1,2,3,4,5,6]]
         
     return sortedChunks[0] #Return first element from sortedChunks, which is the array we need
+
+# Reminder: I’m using multiprocessing here (not multithreading) because of Python’s GIL (Global Interpreter Lock).  
+# The GIL only lets one thread run Python code at a time, so threads don’t give true parallelism 
+# for CPU-heavy work like sorting. With multiprocessing, each process runs on its own CPU core, 
+# so the sorting actually happens in parallel.
