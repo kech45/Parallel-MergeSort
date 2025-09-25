@@ -37,20 +37,31 @@ def parallelMergeSort(arr, processCount):
     chunkSize = len(arr) // processCount
     
     #A list of lists a little bit harder to understand, but basically contains all chunks possible
-    chunks = [arr[i:i + chunkSize] for i in range(0, len(arr), chunkSize)]
+    chunks = [arr[i:i + chunkSize] for i in range(0, len(arr), chunkSize)] # from idx 0 to length of arr with jumps of chunkSize
+    #for example arr = [1,2,3,4,5,6,7,8,9] => chunks = [[1,2,3], [4,5,6], ]
 
     #Create a pool of worker processes that are equal to processCount
     with Pool(processCount) as pool:
         #Each worker receives a chunk and runs sequentialMergeSort on it, the result is sortedChunks, which is a list of lists
         sortedChunks = pool.map(sequentialMergeSort, chunks)
+        # sortedChunks = [[3,4] ,[5,6], [1,2]]
 
     while len(sortedChunks) > 1: #Keep merging until only 1 element is left
         temp = [] #Temporary list to keep merged chunks this iteration
         for i in range(0, len(sortedChunks), 2): #Go through sorted chunks in pairs
-            if i + 1 < len(sortedChunks): #If i and i+1 exists then merge them
+            if i + 1 < len(sortedChunks):  
                 temp.append(merge(sortedChunks[i], sortedChunks[i + 1]))
-            else:                         #If i and i+1 does not exist then just append the list to temp
+                # first while loop:
+                # temp = [[3,4,5,6]]; i = 0
+                # second while loop: 
+                # temp = [[1,2,3,4,5,6]]; i = 0
+            else:                         
                 temp.append(sortedChunks[i])
-        sortedChunks = temp               #Replace sorted chunks with the current merged list
-
+                # temp = [[3,4,5,6], [1,2]]; i = 2
+        sortedChunks = temp               
+        # after first while loop:
+        # sortedChunks = [[3,4,5,6], [1,2]];
+        # after second while loop:
+        # sortedChunks = [[1,2,3,4,5,6]]
+        
     return sortedChunks[0] #Return first element from sortedChunks, which is the array we need
