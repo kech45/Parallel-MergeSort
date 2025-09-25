@@ -60,7 +60,6 @@ class MergeSortApp:
         try:
             self.server = MergeSortServer(processCount=processCount)
             self.server.start()
-            print(f"[TIME] Sorting took {endTime - startTime:.4f} seconds")
         except Exception as e:
             self.log(f"Server error: {e}")
 

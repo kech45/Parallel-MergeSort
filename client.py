@@ -37,36 +37,36 @@ class MergeSortClient:
         return pickle.loads(data)
  
  
-#Test function   
-def runClient(clientID, arraySize = 10000000):
-        #Create an instance of the client
-    client = MergeSortClient()
-
-#Generate a large array of 10 million random integers
-    randomArray = [random.randint(0, arraySize) for _ in range(arraySize)]
-
-#Send the array to the server and receive the sorted result
-    sortedArr = client.sendArray(randomArray)
-    print(f"Client {clientID}'s sorted array's first 10 elements:", sortedArr[:10])
-    
-if __name__ == "__main__":
-    # Default: 1 client
-    num_clients = 1
-
-    if len(sys.argv) > 1:
-        try:
-            num_clients = int(sys.argv[1])
-        except ValueError:
-            print("Usage: python client.py [num_clients]")
-            sys.exit(1)
-
-    threads = []
-    for i in range(num_clients):
-        thread = threading.Thread(target=runClient, args=(i,))
-        thread.start()
-        threads.append(thread)
-
-    for thread in threads:
-        thread.join()
-
-    print(f"All {num_clients} clients finished.")
+# #Test function   
+# def runClient(clientID, arraySize = 10000000):
+#         #Create an instance of the client
+#     client = MergeSortClient()
+#
+# #Generate a large array of 10 million random integers
+#     randomArray = [random.randint(0, arraySize) for _ in range(arraySize)]
+#
+# #Send the array to the server and receive the sorted result
+#     sortedArr = client.sendArray(randomArray)
+#     print(f"Client {clientID}'s sorted array's first 10 elements:", sortedArr[:10])
+#   
+# if __name__ == "__main__":
+#     # Default: 1 client
+#     num_clients = 1
+#
+#     if len(sys.argv) > 1:
+#         try:
+#             num_clients = int(sys.argv[1])
+#         except ValueError:
+#             print("Usage: python client.py [num_clients]")
+#             sys.exit(1)
+#
+#     threads = []
+#     for i in range(num_clients):
+#         thread = threading.Thread(target=runClient, args=(i,))
+#         thread.start()
+#         threads.append(thread)
+#
+#     for thread in threads:
+#         thread.join()
+#
+#     print(f"All {num_clients} clients finished.")

@@ -67,25 +67,25 @@ class MergeSortServer:
             print(f"[INFO] Closed connection to {addr}")
 
 
-if __name__ == "__main__":
-    import multiprocessing
-    import sys
-
-    multiprocessing.freeze_support()  #For compatibility on Windows when using multiprocessing
-
-    #Expect exactly one argument: number of processes to use
-    if len(sys.argv) != 2:
-        print("Usage: python server.py <process_count>")
-        sys.exit(1)
-
-    try:
-        #Convert the argument to an integer
-        processCount = int(sys.argv[1])
-    except ValueError:
-        #Exit if the argument is not a valid integer
-        print("Process count must be an integer.")
-        sys.exit(1)
-
-    #Create server instance and start it
-    server = MergeSortServer(processCount=processCount)
-    server.start()
+# if __name__ == "__main__":
+#     import multiprocessing
+#     import sys
+#
+#     multiprocessing.freeze_support()  #For compatibility on Windows when using multiprocessing
+#
+#     #Expect exactly one argument: number of processes to use
+#     if len(sys.argv) != 2:
+#         print("Usage: python server.py <process_count>")
+#         sys.exit(1)
+#
+#     try:
+#         #Convert the argument to an integer
+#         processCount = int(sys.argv[1])
+#     except ValueError:
+#         #Exit if the argument is not a valid integer
+#         print("Process count must be an integer.")
+#         sys.exit(1)
+#
+#     #Create server instance and start it
+#     server = MergeSortServer(processCount=processCount)
+#     server.start()
