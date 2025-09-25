@@ -46,6 +46,7 @@ class MergeSortApp:
         self.startButton.config(state='disabled') #disable button after getting clicked
         self.log("Starting server and clients...")
 
+        #Start server
         serverThread = threading.Thread(target=self.serverTarget, args=(processCount,), daemon=True)
         serverThread.start()
 
